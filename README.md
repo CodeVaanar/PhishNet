@@ -1,21 +1,19 @@
 # PHISHNET 
-PhishNet is a lightweight, Flask-based, multi-engine security tool designed to analyze suspicious URLs in real time. It aggregates threat intelligence from industry leading security services such as VirusTotal and urlscan.io to deliver a comprehensive verdict on potential risks, including phishing attempts, malware distribution, and social engineering attacks.
+PhishNet is a lightweight, Flask-based security tool that checks suspicious URLs in real time. It uses trusted security services like VirusTotal and urlscan.io to help identify risks such as phishing websites, malware, and social engineering attacks.
+
+The goal of PhishNet is to provide clear results in one place, without requiring users to manually check multiple security platforms.
 
 ## Features
 
-1. Multi-Engine URL Analysis - PhishNet submits user-provided URLs to different threat-intelligence services and normalizes their outputs into a single, actionable verdict.
-     - VirusTotal — Correlates URL reputation across 60+ antivirus engines and blocklists.
-     - urlscan.io — Executes a live behavioral scan, capturing network activity, DOM changes, and a rendered page screenshot.
+1. Multi-Engine URL Analysis - PhishNet sends a URL to multiple security services and combines their results into a single, easy-to-understand report.
+     - VirusTotal checks the URL against many antivirus engines and blocklists.
+     - urlscan.io analyzes how the website behaves and captures a screenshot.
 
-2. Thread Pool–Based Concurrency - PhishNet utilizes Python’s concurrent.futures.ThreadPoolExecutor to execute multiple URL analysis tasks concurrently. A managed thread pool is used to efficiently handle I/O-bound scanning operations while controlling resource usage.
+2. Faster Scans - Multiple scans run at the same time, reducing the overall waiting time for results.
 
-3. Visual Context Without Exposure -  Retrieves and displays the urlscan.io screenshot, enabling visual inspection of the target page without direct interaction.
+4. Website Screenshot Preview -  Displays a screenshot of the scanned website so users can view it safely without opening the link directly.
 
-4. Unified Security Interface - Designed as a single aggregation layer for multiple security tools, eliminating the need to manually cross-check results across platforms.
-
-5. JSON-First Backend - The Flask backend is built around structured JSON request/response handling, enabling clean API boundaries, easy extensibility, and straightforward frontend or third-party integration.
-
-6. Modular & Extensible Architecture - The codebase follows a modular design, with each scanning engine, utility, and response processor isolated into independent components. This allows new security tools to be integrated with minimal refactoring.
+5. JSON-based Backend - The backend handles data in JSON format, making it easy to extend or connect with other tools in the future.
 
 ## Prerequisites
 
@@ -29,7 +27,7 @@ PhishNet is a lightweight, Flask-based, multi-engine security tool designed to a
     - Frontend:
         - HTML5 & CSS3: No installation required (standard web technologies).
         - JavaScript: Runs natively in the browser.
-        - Browser: A modern web browser (Chrome, Firefox, Edge, or Safari) is required to render the UI.
+        - Browser: A modern web browser (Chrome, Firefox, Edge, or Safari) is required to be able the UI.
      
 2. Required python libraries
    - pip install flask
