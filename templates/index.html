@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> PhishNet </title>
+        <style>
+            /* Global page styling */
+            body {
+                background-color: #000;
+                color: #39ff14; /* neon green */
+                font-family: "Courier New", monospace;
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Form container */
+            form {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-size: 18px;
+            }
+
+            /* URL input */
+            input[type="url"] {
+                background-color: #000;
+                color: #39ff14;
+                border: 2px solid #39ff14;
+                padding: 8px 12px;
+                width: 300px;
+                outline: none;
+                font-size: 14px;
+            }
+
+            input[type="url"]::placeholder {
+                color: #2ecc71;
+            }
+
+            /* Scan button */
+            button {
+                background-color: #000;
+                color: #39ff14;
+                border: 2px solid #39ff14;
+                padding: 8px 16px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            button:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+            button:hover:not(:disabled) {
+                background-color: #39ff14;
+                color: #000;
+            }
+
+            /* Results section */
+            h2 {
+                margin-top: 10px;
+            }
+
+            #output {
+                text-align: center;
+                max-width: 600px;
+            }
+
+            /* Scanning text */
+            #output p:first-child {
+                color: #ffd700; /* yellow for scanning */
+                font-weight: bold;
+            }
+
+            /* Result cards */
+            h3 {
+                margin-top: 20px;
+                text-decoration: underline;
+            }
+
+            p {
+                margin: 6px 0;
+            }
+
+            img {
+                margin-top: 10px;
+                max-width: 100%;
+                border: 2px solid #39ff14;
+            }
+            .status-text {
+            color: #4fc3f7; /* light blue */
+            font-weight: bold;
+            }
+
+            /* Version text */
+            .version {
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                font-size: 12px;
+                color: #2ecc71;
+                opacity: 0.7;
+                pointer-events: none;
+            }
+        </style>
+    </head>
+
+<body>
+    <form id = "scanform">
+        <label> Enter URL :</label>
+        <input type = "url" id = "urlInput" name = "url" placeholder="https://example.com" required>
+        <button type = "submit" id ="scanBtn"> Scan</button>
+    </form>
+    <div id = "output"></div>
+
+    <div class="version">PhishNet v1.0</div>
+
+<script>
+document.getElementById("scanform").addEventListener("submit",function(event){
+    event.preventDefault();
+    const url = document.getElementById("urlInput").value;
+    const scanButton = document.getElementById("scanBtn");
+
+    scanButton.disabled = true;
+    document.getElementById("output").innerHTML = `<p>Scanning <strong>${url}</strong>...</p>`;
+
+    fetch("/scan",{
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body :JSON.stringify({url : url})
+    })
+    .then(response => response.json())
+    .then (data =>{
+        scanButton.disabled = false;
+        document.getElementById("output").innerHTML = `
+    
+        ${ data.VirusTotal ? `
+            <h3> VirusTotal : Database Reputation Check</h3>
+            <p><strong>Status:</strong> ${data.VirusTotal.status}</p>
+            <p><strong>Reason:</strong> ${data.VirusTotal.reason}</p>
+        ` : "<p>VirusTotal data unavailable</p>" }
+
+        ${ data.UrlScan ? `
+            <h3>URLScan : Live Behavioral Check</h3>
+            <p><strong>Status:</strong> ${data.UrlScan.status}</p>
+            <p><strong>Reason:</strong> ${data.UrlScan.reason}</p>
+            ${ data.UrlScan.screenshot ? `<img src="${data.UrlScan.screenshot}" alt="UrlScan Screenshot" />` : "" }
+        ` : "<p>UrlScan data unavailable</p>" }
+
+`;
+})
+    .catch(error => {
+            scanButton.disabled = false;
+            document.getElementById("output").innerText = "Error scanning URL";
+            console.error(error);
+        });
+});
+</script>
+</body>
+</html>
