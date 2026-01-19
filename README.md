@@ -1,4 +1,5 @@
-<img width="1263" height="624" alt="image" src="https://github.com/user-attachments/assets/71c14ade-604a-476f-9617-7dd216f5062c" />
+<img width="2912" height="1440" alt="phishnet" src="https://github.com/user-attachments/assets/3245692a-fdbc-4925-923a-6f229344f7ca" />
+
  
 PhishNet is a lightweight, Flask-based security tool that checks suspicious URLs in real time. It uses trusted security services like VirusTotal and urlscan.io to help identify risks such as phishing websites, malware, and social engineering attacks.
 
@@ -49,3 +50,7 @@ The goal of PhishNet is to provide clear results in one place, without requiring
     - python app.py
     - After the server starts, copy the local URL displayed in the terminal and open it in your web browser.
       
+## Glimpse
+<img width="679" height="278" alt="Screenshot 2026-01-19 201152" src="https://github.com/user-attachments/assets/129396fa-6599-46e9-b610-f3d419479311" />
+
+<img width="698" height="605" alt="Screenshot 2026-01-19 201140" src="https://github.com/user-attachments/assets/a1a78a81-2017-472e-8b83-365a0b0321f8" />
