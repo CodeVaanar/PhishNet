@@ -1,6 +1,7 @@
 '''
 Date - 08 - 12 - 2025
-Aurthor - CodeVanaar
+Author - CodeVaanar
+Desc - handles all communication with VirusTotal API and handles the results.
 '''
 
 

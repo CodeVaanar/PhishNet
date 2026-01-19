@@ -1,6 +1,7 @@
 '''
 Date - 02 - 01 - 2026
-Aurthor - CodeVanaar
+Author - CodeVaanar
+Desc - this the flask application for PhishNet. it coordinates between the frontend and security tools.
 '''
 
 from flask import Flask, request, render_template, make_response

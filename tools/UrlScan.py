@@ -1,3 +1,9 @@
+'''
+Date - 19 - 12 - 2025
+Author - CodeVaanar
+Desc - handles all communication with UrlScan API and handles the results.
+'''
+
 import requests
 import time
 import os 
